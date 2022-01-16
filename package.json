@@ -1,0 +1,36 @@
+{
+  "name": "koa2-typescript",
+  "version": "1.0.0",
+  "main": "main.ts",
+  "repository": "git@github.com:xingxingzaixian/koa2-typescript.git",
+  "author": "xingxingzaixian <beixia1989@163.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon",
+    "migration": "typeorm migration:create",
+    "migrate": "typeorm migration:generate"
+  },
+  "dependencies": {
+    "async-validator": "^4.0.7",
+    "dotenv": "^12.0.3",
+    "koa": "^2.13.4",
+    "koa-body": "^4.2.0",
+    "koa-router": "^10.1.1",
+    "koa2-cors": "^2.0.6",
+    "log4js": "^6.3.0",
+    "mysql2": "^2.3.3",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.41"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/koa": "^2.13.4",
+    "@types/koa-router": "^7.4.4",
+    "@types/koa2-cors": "^2.0.2",
+    "@types/log4js": "^2.3.5",
+    "@types/reflect-metadata": "^0.1.0",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
+  }
+}
