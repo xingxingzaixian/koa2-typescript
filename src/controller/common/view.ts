@@ -1,16 +1,14 @@
 import { Context } from 'koa';
+import bcryptjs from 'bcryptjs';
 import validate from '../../utils/validate';
 import { LoginParam, RegisterParam } from './types';
 import { loginRules, registRules } from './rules';
 import response from '../../utils/response';
 import type { Files, File as FileType } from 'formidable';
 import User from '../../entity/User';
+import { generateToken } from '../../utils/auth';
 
 class IndexController {
-  async index(ctx: Context) {
-    response.success(ctx, 'hello world');
-  }
-
   async login(ctx: Context) {
     const { data, error } = await validate<LoginParam>(ctx, loginRules);
     if (error) {
@@ -18,7 +16,22 @@ class IndexController {
       return;
     }
 
-    response.success(ctx, data);
+    // 校验用户是否存在
+    let user: User | undefined = await User.getUserInfo(data.username);
+    if (!user) {
+      response.error(ctx, '用户不存在');
+      return;
+    }
+
+    // 校验密码是否正确
+    if (!bcryptjs.compareSync(data.password, user.password)) {
+      response.error(ctx, '密码错误');
+      return;
+    }
+
+    const { password, ...rest } = user;
+    const token = generateToken(rest);
+    response.success(ctx, { token }, '登录成功');
   }
 
   async register(ctx: Context) {

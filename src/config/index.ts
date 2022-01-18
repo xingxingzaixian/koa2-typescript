@@ -2,6 +2,7 @@ const config = {
   server: {
     port: Number(process.env.SERVER_PORT) || 3300,
   },
+  secret: process.env.AUTH_SECRET || 'secret',
   log: {
     appenders: {
       out: { type: 'stdout' },
