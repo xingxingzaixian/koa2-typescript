@@ -8,12 +8,14 @@ import { verifyToken } from '../utils/auth';
  */
 const authMiddleWare = async (ctx: Context, next: Next) => {
   const { authorization } = ctx.request.header;
-  console.log(authorization);
   if (!authorization) {
     ctx.throw(401, '未登录');
   }
 
-  const token = authorization.split(' ')[1];
+  const token =
+    authorization.indexOf(' ') === -1
+      ? authorization
+      : authorization.split(' ')[1];
   const { data, error } = verifyToken(token);
   if (!error) {
     ctx.state.user = data;

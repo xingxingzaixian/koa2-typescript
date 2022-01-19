@@ -1,17 +1,11 @@
 {
   "compilerOptions": {
-    /* Visit https://aka.ms/tsconfig.json to read more about this file */
-
-    /* Basic Options */
-    // "incremental": true,                         /* Enable incremental compilation */
-    "target": "ES2020",                                /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', 'ES2021', or 'ESNEXT'. */
+    "target": "es2021",                                /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', 'ES2021', or 'ESNEXT'. */
     "module": "commonjs",                           /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */
-    "lib": [ "ES6" ],                                   /* Specify library files to be included in the compilation. */
-    "sourceMap": true,                           /* Generates corresponding '.map' file. */
+    "lib": ["ES6", "ES2021", "ES7"],                                   /* Specify library files to be included in the compilation. */
     
     /* Strict Type-Checking Options */
     "strict": true,                                 /* Enable all strict type-checking options. */
-    "types": ["node"],                              /* Specify type definitions to be used. */
     
     /* Module Resolution Options */
     "moduleResolution": "node",                  /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */

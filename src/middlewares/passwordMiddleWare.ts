@@ -7,14 +7,14 @@ import bcryptjs from 'bcryptjs';
  * @param next
  */
 const encryptPassword = async (ctx: Context, next: Next) => {
-  const { password, confirm } = ctx.request.body;
+  const { password, confirm } = ctx.validatedBody;
   const salt = bcryptjs.genSaltSync(10);
   if (password) {
-    ctx.request.body.password = bcryptjs.hashSync(password, salt);
+    ctx.validatedBody.password = bcryptjs.hashSync(password, salt);
   }
 
   if (confirm) {
-    ctx.request.body.confirm = bcryptjs.hashSync(confirm, salt);
+    ctx.validatedBody.confirm = bcryptjs.hashSync(confirm, salt);
   }
 
   await next();

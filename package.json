@@ -1,24 +1,18 @@
 {
-  "name": "koa2-typescript",
+  "name": "koa2-demo",
   "version": "1.0.0",
   "main": "main.ts",
-  "repository": "git@github.com:xingxingzaixian/koa2-typescript.git",
-  "author": "xingxingzaixian <beixia1989@163.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon",
-    "migration": "typeorm migration:create",
-    "migrate": "typeorm migration:generate"
+    "start": "nodemon"
   },
   "dependencies": {
-    "@types/jsonwebtoken": "^8.5.7",
-    "async-validator": "^4.0.7",
     "bcryptjs": "^2.4.3",
-    "dotenv": "^12.0.3",
+    "dotenv": "^14.2.0",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.4",
     "koa-body": "^4.2.0",
-    "koa-router": "^10.1.1",
+    "koa-swagger-decorator": "^1.8.2",
     "koa2-cors": "^2.0.6",
     "log4js": "^6.3.0",
     "mysql2": "^2.3.3",
@@ -28,8 +22,8 @@
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/dotenv": "^8.2.0",
+    "@types/jsonwebtoken": "^8.5.8",
     "@types/koa": "^2.13.4",
-    "@types/koa-router": "^7.4.4",
     "@types/koa2-cors": "^2.0.2",
     "@types/log4js": "^2.3.5",
     "@types/reflect-metadata": "^0.1.0",

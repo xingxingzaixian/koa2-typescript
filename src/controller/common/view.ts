@@ -1,20 +1,32 @@
 import { Context } from 'koa';
 import bcryptjs from 'bcryptjs';
-import validate from '../../utils/validate';
-import { LoginParam, RegisterParam } from './types';
-import { loginRules, registRules } from './rules';
+import {
+  request,
+  summary,
+  body,
+  tags,
+  formData,
+  responses,
+  middlewares,
+} from 'koa-swagger-decorator';
 import response from '../../utils/response';
-import type { Files, File as FileType } from 'formidable';
+import { loginRules, registRules } from './schema';
 import User from '../../entity/User';
 import { generateToken } from '../../utils/auth';
+import type { Files, File as FileType } from 'formidable';
+import encryptPassword from '../../middlewares/passwordMiddleWare';
 
-class IndexController {
-  async login(ctx: Context) {
-    const { data, error } = await validate<LoginParam>(ctx, loginRules);
-    if (error) {
-      response.error(ctx, error);
-      return;
-    }
+export default class IndexController {
+  @request('post', '/login')
+  @summary('登录')
+  @tags(['基础接口'])
+  @body(loginRules)
+  @responses({
+    200: { description: 'success' },
+    500: { description: 'something wrong about server' },
+  })
+  static async login(ctx: Context) {
+    const data = ctx.validatedBody;
 
     // 校验用户是否存在
     let user: User | undefined = await User.getUserInfo(data.username);
@@ -34,10 +46,17 @@ class IndexController {
     response.success(ctx, { token }, '登录成功');
   }
 
-  async register(ctx: Context) {
-    const { data, error } = await validate<RegisterParam>(ctx, registRules);
-    if (error) {
-      response.error(ctx, error);
+  @request('post', '/register')
+  @summary('注册')
+  @tags(['基础接口'])
+  @middlewares([encryptPassword])
+  @body(registRules)
+  static async register(ctx: Context) {
+    const data = ctx.validatedBody;
+
+    // 确认密码是否一致
+    if (data.password !== data.confirm) {
+      response.error(ctx, '密码不一致');
       return;
     }
 
@@ -58,7 +77,13 @@ class IndexController {
     response.success(ctx, data, '注册成功');
   }
 
-  async upload(ctx: Context) {
+  @request('post', '/upload')
+  @summary('上传文件')
+  @tags(['基础接口'])
+  @formData({
+    file: { type: 'string', required: true, format: 'binary' },
+  })
+  static async upload(ctx: Context) {
     const files: Files | undefined = ctx.request.files;
     if (files) {
       const data: { url: string; name: string; size: number }[] = [];
@@ -76,5 +101,3 @@ class IndexController {
     }
   }
 }
-
-export default new IndexController();

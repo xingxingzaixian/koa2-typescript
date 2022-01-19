@@ -56,4 +56,17 @@ export default class User {
       throw e;
     }
   }
+
+  /**
+   * @description 获取所有用户信息
+   */
+  static async getUserList() {
+    try {
+      const userRepository: Repository<User> = getRepository(User);
+      const userList: User[] = await userRepository.find();
+      return userList;
+    } catch (e) {
+      throw e;
+    }
+  }
 }
