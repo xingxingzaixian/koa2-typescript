@@ -4,7 +4,8 @@
   "main": "main.ts",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon"
+    "start": "nodemon",
+    "build": "tsc"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
