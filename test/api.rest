@@ -1,0 +1,24 @@
+
+# 定义变量
+@host = localhost:3300
+
+### 登录接口
+// 定义登录的名称，这样请求的返回值就可以在其他接口中使用
+# @name loginApi
+POST http://{{host}}/login
+Content-Type: application/json
+
+{
+    "username": "guest1234",
+    "password": "12345678"
+}
+
+### 获取用户信息
+// 从登录接口中获取返回体中的 token，并将 token 作为请求头的 Authorization 字段
+@token = {{loginApi.response.body.$.data.token}}
+GET http://{{host}}/getuserinfo
+Authorization: Bearer {{token}}
+
+### 获取所有用户信息
+GET http://{{host}}/getuserlist
+Authorization: Bearer {{token}}
