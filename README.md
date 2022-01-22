@@ -17,7 +17,8 @@
 - [跨域认证处理](https://www.toutiao.com/item/7054002828590809612/)
 - [密码加密处理](https://www.toutiao.com/item/7054061987600335396/)
 - [登录认证处理](https://www.toutiao.com/item/7054445172838400544/)
-
+- [其他请求参数处理](https://www.toutiao.com/item/7055897400015094275/)
+- [API文档生成（番外）](https://www.toutiao.com/item/7055284084603650599/)
 
 
 # 开发环境搭建
